@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>김희수 W2 Sketch4</title>
+    <title>김희수 W2 Sketch7</title>
     <link
       href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
       rel="stylesheet"
@@ -11,45 +11,42 @@
     <link rel="stylesheet" href="../../../../style/style.css" />
     <link rel="stylesheet" href="../../../../plugin/prism/prism.css" />
     <script src="../../../../plugin/prism/prism.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@latest/lib/p5.min.js"></script>
+    <script src="./script/sketch.js"></script>
   </head>
   <body>
     <div class="viewport">
       <header>
         <section>
           <div class="container">
-            <h1>김희수 W2 Sketch4</h1>
+            <h1>김희수 W2 Sketch7</h1>
           </div>
         </section>
       </header>
       <main>
         <section>
           <div class="container">
-            <h2 id="user-name-goes-here"></h2>
+            <div id="canvas-goes-here"></div>
           </div>
         </section>
       </main>
       <footer>
         <section>
-          <div class="continer">
+          <div class="container">
             <h2>코드</h2>
             <h6>index.html</h6>
             <pre
               class="line-numbers"
               data-src="./index.html"
               data-download-link></pre>
+            <h6>sketch.js</h6>
+            <pre
+              class="line-numbers"
+              data-src="./script/sketch.js"
+              data-download-link></pre>
           </div>
         </section>
       </footer>
     </div>
-    <script>
-      let userName = prompt('당신의 이름은 무엇입니까?', '홍길동');
-      let isUserNameCorrect = confirm(
-        '당신의 이름이 ' + userName + '이 맞습니까?'
-      );
-      if (isUserNameCorrect == true) {
-        document.getElementById('user-name-goes-here').textContext =
-          '환영합니다. ' + userName + '님';
-      }
-    </script>
   </body>
 </html>
