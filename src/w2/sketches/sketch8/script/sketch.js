@@ -3,7 +3,12 @@ function setup() {
   background('#ff7733');
 }
 
+// function draw() {
+//   background('#ff7733');
+//   circle(mouuseX, mouseY, 50);
+// }
+
 function draw() {
   background('#ff7733');
-  circle(mouuseX, mouseY, 50);
+  circle(mouseX, mouseY, 50);
 }

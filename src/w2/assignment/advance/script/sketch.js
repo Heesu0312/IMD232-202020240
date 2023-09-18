@@ -1,12 +1,14 @@
 function setup() {
-  setCanvasContainer('anyname', 3, 2, true);
-
-  background(255);
-  noStroke();
-  fill('red');
+  setCanvasContainer('canvas', 3, 2, true);
+  background('white');
 }
 
 function draw() {
-  background(255);
-  circle(mouseX, mouseY, 50);
+  background('#B4CDCD');
+
+  noStroke();
+  colorMode(RGB);
+
+  fill('#7A8B8B');
+  rect(450, 70, 300, 350);
 }
