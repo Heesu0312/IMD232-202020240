@@ -1,83 +1,46 @@
-let circle;
-const acceleration = 100;
-const velocity = 10;
+let bodies = [];
+let G = 1;
+let showVector = false;
 
 function setup() {
-  setCanvasContainer('canvas', 3, 2, true);
-  background(255);
-  circle = new Circle(width / 2, height / 2);
+  createCanvas(600, 400);
+  reset();
 }
 
 function draw() {
-  background(225);
-  circle.update();
-  circle.display();
+  background(255);
+
+  for (let i = 0; i < bodies.length; i++) {
+    for (let j = 0; j < bodies.length; j++) {
+      if (i !== j) {
+        let forceForJ = bodies[i].attract(bodies[j]);
+        bodies[j].applyForce(forceForJ);
+      }
+    }
+    bodies[i].update();
+    bodies[i].display();
+    if (showVector) {
+      bodies[i].displayVectors();
+    }
+  }
 }
 
-class Circle {
-  constructor(x, y) {
-    this.position = createVector(x, y);
-    this.velocity = createVector(0, 0);
-    this.acceleration = createVector(0, 0);
-    this.radius = 30;
+function mousePressed() {
+  if (isMouseInsideCanvas()) {
+    reset();
   }
+}
 
-  update() {
-    const randomAcceleration = p5.Vector.random2D().mult(2);
-    this.acceleration = randomAcceleration;
-
-    this.acceleration.limit(2);
-
-    this.velocity.add(this.acceleration);
-
-    this.velocity.limit(10);
-
-    this.position.add(this.velocity);
-    this.wrapAround();
-
-    return this;
+function keyPressed() {
+  if (key === 's' || key === 'S') {
+    showVector = !showVector;
   }
+}
 
-  wrapAround() {
-    if (this.position.x < -this.radius) {
-      this.position.x = width + this.radius;
-    } else if (this.position.x > width + this.radius) {
-      this.position.x = -this.radius;
-    }
-
-    if (this.position.y < -this.radius) {
-      this.position.y = height + this.radius;
-    } else if (this.position.y > height + this.radius) {
-      this.position.y = -this.radius;
-    }
-  }
-
-  display() {
-    stroke(0);
-    line(this.position.x, this.position.y, mouseX, mouseY);
-
-    stroke('red');
-    let accVector = this.acceleration.copy().mult(acceleration);
-    line(
-      this.position.x,
-      this.position.y,
-      this.position.x + accVector.x,
-      this.position.y + accVector.y
-    );
-
-    stroke('blue');
-    let velVector = this.velocity.copy().mult(velocity);
-    line(
-      this.position.x,
-      this.position.y,
-      this.position.x + velVector.x,
-      this.position.y + velVector.y
-    );
-
-    fill('black');
-    noStroke();
-    ellipse(this.position.x, this.position.y, this.radius * 2);
-
-    return this;
+function reset() {
+  bodies = [];
+  for (let i = 0; i < 20; i++) {
+    let mass = random(16, 100);
+    bodies[i] = new Body(random(width), random(height), mass);
   }
 }
