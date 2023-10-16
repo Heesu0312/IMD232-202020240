@@ -3,7 +3,7 @@ let G = 1;
 let showVector = false;
 
 function setup() {
-  createCanvas(600, 400);
+  setCanvasContainer('mySketchGoesHere', 3, 2, true);
   reset();
 }
 
