@@ -1,9 +1,9 @@
 class Particle {
   constructor(x, y) {
     this.pos = createVector(x, y);
-    this.vel = createVector(0, 2);
+    this.vel = createVector(0, 4);
     this.angle = random(TWO_PI);
-    this.size = 10;
+    this.size = 11;
     this.color = color(random(360), random(100), random(50, 80), 70);
     this.acceleration = createVector(0, 0);
   }

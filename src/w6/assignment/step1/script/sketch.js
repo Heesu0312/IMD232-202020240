@@ -12,7 +12,7 @@ function setup() {
 function draw() {
   background(360, 0, 100);
 
-  if (random(1) < 0.5) {
+  if (random(1) < 0.999) {
     let x = random(width);
     let p = new Particle(x, 0);
     particles.push(p);
