@@ -8,9 +8,9 @@ class Particle {
     this.acceleration = createVector(0, 0);
   }
 
-  applyForce(force) {
-    this.acceleration.add(force);
-  }
+  // applyForce(force) {
+  //   this.acceleration.add(force);
+  // }
 
   update() {
     this.vel.add(this.acceleration);
