@@ -5,15 +5,18 @@ class Particle {
     this.angle = random(TWO_PI);
     this.size = 10;
     this.color = color(random(360), random(100), random(50, 80), 70);
+    this.acceleration = createVector(0, 0); // 가속도 초기화
   }
 
   applyForce(force) {
-    this.vel.add(force);
+    this.acceleration.add(force); // 파티클에 중력 적용
   }
 
   update() {
+    this.vel.add(this.acceleration); // 속도에 가속도 더함
     this.pos.add(this.vel);
     this.angle += this.vel.mag() * 0.03;
+    this.acceleration.mult(0); // 가속도 초기화
   }
 
   display() {
