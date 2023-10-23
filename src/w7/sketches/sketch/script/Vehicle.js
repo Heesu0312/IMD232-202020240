@@ -8,7 +8,25 @@ class Vehicle {
     this.color = color;
   }
 
+  seek(target) {
+    // target.sub(this.pos);
+    let desired = p5.Vector.sub(target, this.pos);
+    desired.setMag(this.speeMx);
+    // desired.normalize();
+    // desired.mult(this.speedMx);
+    let steering = p5.Vector.sub(desired, this.vel);
+    if (debug) {
+      push();
+      translate(this.pos.x, this.pos.y);
+      noFill();
+      stroke(127);
+      line(0, 0, desired.x, desired.y);
+      pop();
+    }
+  }
+
   applyForce(force) {
+    // force.div(this.mass);
     let calcedAcc = p5.Vecror.div(force, this.mass);
     this.acc.add(calcedAcc);
   }

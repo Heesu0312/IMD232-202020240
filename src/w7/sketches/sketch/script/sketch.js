@@ -1,4 +1,5 @@
 let vehicle;
+let dubug;
 
 function setup() {
   setCanvasContainer('canvas', 2, 1, true);
@@ -12,7 +13,9 @@ function setup() {
 }
 
 function draw() {
-  vehicle.update();
   background(255);
+  mVec.set(mouseX, mouseY);
+  vehicle.seek();
+  vehicle.update();
   vehicle.display();
 }
