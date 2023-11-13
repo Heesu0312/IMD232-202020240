@@ -7,7 +7,8 @@ var Engine = Matter.Engine,
   Constraint = Matter.Constraint,
   MouseConstraint = Matter.MouseConstraint,
   Mouse = Matter.Mouse,
-  Bodies = Matter.Bodies;
+  Bodies = Matter.Bodies,
+  Vertices = Matter.Vertices;
 
 // create engine
 var engine = Engine.create(),
@@ -24,6 +25,9 @@ var render = Render.create({
     showAngleIndicator: true,
     showCollisions: true,
     showVelocity: true,
+    wireframes: false,
+    background: '#fff',
+    clearBackground: false,
   },
 });
 
@@ -36,9 +40,21 @@ Runner.run(runner, engine);
 // add bodies
 var group = Body.nextGroup(true);
 
-var ropeA = Composites.stack(100, 50, 8, 1, 10, 10, function (x, y) {
-  return Bodies.rectangle(x, y, 50, 20, {
+// Create concave vertices for each ropeA body
+var concaveVerticesA = [
+  Vertices.fromPath('0 0 25 0 25 10 10 20 0 20'), // Example shape 1
+  Vertices.fromPath('0 0 30 0 20 20 10 20'), // Example shape 2
+  Vertices.fromPath('0 0 40 0 40 10 20 20 0 10'), // Example shape 3
+];
+
+var ropeA = Composites.stack(100, 50, 10, 1, 10, 10, function (x, y, column) {
+  var concaveVertices = concaveVerticesA[column % concaveVerticesA.length];
+
+  return Bodies.fromVertices(x, y, concaveVertices, {
     collisionFilter: { group: group },
+    render: {
+      fillStyle: 'red', // 빨간색
+    },
   });
 });
 
@@ -60,7 +76,12 @@ Composite.add(
 group = Body.nextGroup(true);
 
 var ropeB = Composites.stack(350, 50, 10, 1, 10, 10, function (x, y) {
-  return Bodies.circle(x, y, 20, { collisionFilter: { group: group } });
+  return Bodies.circle(x, y, 20, {
+    collisionFilter: { group: group },
+    render: {
+      fillStyle: 'blue', // 파란색
+    },
+  });
 });
 
 Composites.chain(ropeB, 0.5, 0, -0.5, 0, {
@@ -80,10 +101,13 @@ Composite.add(
 
 group = Body.nextGroup(true);
 
-var ropeC = Composites.stack(600, 50, 13, 1, 10, 10, function (x, y) {
+var ropeC = Composites.stack(600, 50, 10, 1, 10, 10, function (x, y) {
   return Bodies.rectangle(x - 20, y, 50, 20, {
     collisionFilter: { group: group },
     chamfer: 5,
+    render: {
+      fillStyle: 'green', // 초록색
+    },
   });
 });
 
